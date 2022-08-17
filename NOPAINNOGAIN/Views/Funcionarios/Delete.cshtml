@@ -1,0 +1,63 @@
+﻿@model NOPAINNOGAIN.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Excluir " + Model.Nome;
+}
+
+<h2 style="padding-top: 50px">@ViewData["Title"]</h2>
+
+<h4>Você tem certeza disso?</h4>
+
+<div class="row" style="padding-top: 40px">
+    <div class="col-md-4">
+        <img src="~/imagens/@Model.Imagem" alt="@Model.Imagem" style="width: 350px; height: 390px" />
+    </div>
+    <div class="col-md-6" style="padding-top: 5px">
+        <d1>
+            <dt style="font-size: 18px">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd style="font-size: 20px">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt style="padding-top: 15px; font-size: 18px">
+                @Html.DisplayNameFor(model => model.Documento)
+            </dt>
+            <dd style="font-size: 20px">
+                @Html.DisplayFor(model => model.Documento)
+            </dd>
+            <dt style="padding-top: 15px; font-size: 18px">
+                @Html.DisplayNameFor(model => model.TipoFuncionario)
+            </dt>
+            <dd style="font-size: 20px">
+                @Html.DisplayFor(model => model.TipoFuncionario)
+            </dd>
+            <dt style="padding-top: 15px; font-size: 18px">
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </dt>
+            <dd style="font-size: 20px">
+                @Html.DisplayFor(model => model.DataNascimento)
+            </dd>
+            <dt style="padding-top: 15px; font-size: 18px">
+                @Html.DisplayNameFor(model => model.Salario)
+            </dt>
+            <dd style="font-size: 20px">
+                R$ @Html.DisplayFor(model => model.Salario),00
+            </dd>
+        </d1>
+    </div>
+</div>
+
+<div style="padding-top: 50px">
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <a class="btn btn-info" asp-action="Index"><span class="fa fa-arrow-left"></span></a>
+        <input type="submit" value="Deletar" class="btn btn-danger" />
+    </form>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 6%, rgba(0,160,255,0.10997902579000352) 100%);
+</style>
+

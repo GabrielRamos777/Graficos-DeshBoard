@@ -1,0 +1,251 @@
+﻿@page
+@model RegisterModel
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<div>
+    <div>
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="main-login">
+                <div class="left-login">
+                    <h1>Crie sua nova Conta!</h1>
+                    <img src="~/Imagem(Login)/visionary-technology-animate (2).svg" alt="astronauta" />
+                </div>
+                <div class="rigth-login">
+                    <div class="card-login">
+                        <h1>REGISTRE</h1>
+                        <div class="form-group">
+                            <label asp-for="Input.Cpf"></label>
+                            <input asp-for="Input.Cpf" id="CPF" class="form-control" />
+                            <span asp-validation-for="Input.Cpf" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <button id="button" type="submit" class="btn btn-primary">CRIAR</button>
+                    </div>
+                </div>
+            </div>
+            <audio id="audio" src="~/Imagem(Login)/Justin_Bieber_-_Love_Yourself_(Jesusful.com).mp3"></audio>
+            <button id="button2">?</button>
+        </form>
+    </div>
+    <div>
+        <section>
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+<style>
+
+    body {
+        background: linear-gradient(159deg, rgba(16,20,62,0.958420868347339) 31%, rgba(51,67,168,0.938813025210084) 100%);
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .main-login {
+        width: 80vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left-login {
+        width: 48vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+        .left-login h1 {
+            font-size: 40pt;
+            font-weight: 300;
+            padding-top: 15px;
+            color: #EFEFEF;
+            font-family: 'Itim', cursive;
+            font-family: 'Rubik Wet Paint', cursive;
+        }
+
+    .rigth-login {
+        width: 50vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-login {
+        width: 100%;
+        height: 65vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px, 35px;
+        background-color: #3e90c757;
+        border-radius: 20px;
+        box-shadow: 5px, 10px 40px rgb(25, 22, 31);
+    }
+
+        .card-login h1 {
+            color: #DFDFDF;
+            font-weight: 800;
+            margin: 0;
+        }
+
+    .textfield {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10px 5px;
+    }
+
+        .textfield input {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 10px;
+            background: #41a9ffdd;
+            font-size: 14pt;
+            box-shadow: 5px, 10px 40px rgb(25, 22, 31);
+            outline: none;
+            color: white;
+            box-sizing: border-box;
+        }
+
+            .textfield input::placeholder {
+                color: white;
+            }
+
+        .textfield label {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+    #button {
+        width: 85%;
+        padding: 13px 0px;
+        margin: 40px;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: 2px;
+        color: black;
+        cursor: pointer;
+        box-shadow: 0px 10px 60px -12px rgb(25, 22, 31);
+        background-color: #87CEFA;
+    }
+
+        #button:hover {
+            color: rgba(71, 126, 232, 0.7);
+            transform: translateY(-5px);
+            transition: 1s;
+        }
+</style>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        //const button = document.getElementById("button2")
+        //button.addEventListener("click", function (audio) {
+        //    const audio = document.getElementById("audio")
+        //    audio.play();
+        //})
+        function play() {
+            player.play();
+            button.textContent = "Pause";
+        }
+
+        function pause() {
+            player.pause();
+            button.textContent = "Play";
+        }
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                $("#button2").click()
+                const audio = document.getElementById("audio")
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                //audio.play();
+                //audio.currentTime = 1.10;
+            }
+        });
+
+        $('button').click(function (e) {
+        });
+    </script>
+    <script>
+        const Entrar = document.getElementById("button")
+
+        Entrar.addEventListener("click", function Login() {
+            var done = 0;
+            var usuario = document.getElementsByName('CPF')[0].value;
+            usuario = usuario.toLowerCase();
+            var senha = document.getElementsByName('Senha')[0].value;
+            seha = senha.toLowerCase();
+
+            if (usuario == "498.230.940-04" || usuario == "449.533.078-01" || usuario == "132.213.447-24" && senha == "Prover2021") {
+                window.location = "/Funcionarios/Logar"
+                done = 1;
+            }
+            if (done == 0) {
+                alert("Dados incorretos, tente novamente");
+                return;
+            }
+        })
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js" integrity="sha512-hAJgR+pK6+s492clbGlnrRnt2J1CJK6kZ82FZy08tm6XG2Xl/ex9oVZLE6Krz+W+Iv4Gsr8U2mGMdh0ckRH61Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#CPF").mask("000.000.000-00", { placeholder: "___.___.___-__" });
+        })
+    </script>
+}
+

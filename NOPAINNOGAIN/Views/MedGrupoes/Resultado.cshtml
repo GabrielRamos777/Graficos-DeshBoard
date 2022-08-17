@@ -1,0 +1,174 @@
+﻿
+@model NOPAINNOGAIN.Models.MedGrupo
+@{  ViewBag.Nome = TempData["Nome"].ToString();
+    ViewBag.RM = TempData["RM"].ToString();
+    ViewBag.RMED = TempData["RMED"].ToString();
+    ViewBag.MEDYKLIN = TempData["MEDYKLIN"].ToString();
+    ViewBag.MEDYN = TempData["MEDYN"].ToString();
+    ViewBag.MEDWRITERS = TempData["MEDWRITERS"].ToString();
+    ViewBag.MEDERI = TempData["MEDERI"].ToString();
+    ViewBag.Resultado = TempData["Resultado"]?.ToString();} 
+<html>
+<body>
+
+    <div class="titulo">
+        <h1>Resultado</h1>
+    </div>
+    <div class="containe">
+        <form>
+            Nome: @ViewBag.Nome
+        </form>
+        <form>
+            O valor que foi Dividido: R$ @ViewBag.Resultado
+        </form>
+
+        <form>
+            RM = R$
+            <span id="RM">@ViewBag.RM</span>
+        </form>
+        <form>
+            RMED = R$
+            <span id="RMED">@ViewBag.RMED</span>
+        </form>
+        <form>
+            MEDYKLIN = R$
+            <span id="MEDYKLIN">@ViewBag.MEDYKLIN</span>
+        </form>
+        <form>
+            MEDYN = R$
+            <span id="MEDYN">@ViewBag.MEDYN</span>
+        </form>
+        <form>
+            MEDWRITERS = R$
+            <span id="MEDWRITERS">@ViewBag.MEDWRITERS</span>
+        </form>
+        <form>
+            MEDERI = R$
+            <span id="MEDERI">@ViewBag.MEDERI</span>
+        </form>
+
+    </div>
+</body>
+</html>
+<style>
+
+
+    body {
+        /*        display: block;
+        width: 100%;
+        min-height: 100vh;
+        place-items: center;*/
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 23%, rgba(0,160,255,0.4265056364342612) 100%);
+        /*        background-position: center;
+        background-size: cover;
+        position: absolute;*/
+    }
+
+    div.containe {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background: #4E96FF;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 5px 5px 5px rgb(22, 40, 76);
+        padding-bottom: 80px;
+    }
+
+    .nome {
+        display: inline-block;
+        display: inline;
+        float: left
+    }
+
+
+    body h1 {
+        margin-bottom: 15px;
+        text-align: center;
+        color: rgb(39, 38, 35);
+    }
+
+    div.containe {
+        width: 100%;
+        background-color: #4E96FF;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 5px 5px 5px rgb(22, 40, 76);
+        padding-bottom: 80px;
+    }
+
+        div.containe:hover {
+            -webkit-animation: swing 1s ease;
+            animation: swing 1s ease;
+            -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+        }
+
+    div.containe {
+        font-size: 22px;
+        color: white;
+    }
+
+        div.containe form {
+            align-items: center;
+            justify-content: center;
+            padding-top: 15px;
+            font-size: 25px;
+            color: white;
+        }
+
+    #nome {
+        font-size: 20px;
+        padding: 10px 0;
+        text-align: center;
+        color: rgb(80, 80, 80);
+        max-width: 150px;
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 1px solid rgb(150, 150, 150);
+        outline: 0;
+    }
+
+    .form-control {
+        font-size: 20px;
+        padding: 10px 0;
+        text-align: center;
+        color: rgb(80, 80, 80);
+        max-width: 150px;
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 1px solid rgb(150, 150, 150);
+        outline: 0;
+    }
+
+    div.containe form input:hover,
+    div.containe form input:focus,
+    div.containe form input:valid {
+        border: 1px solid #1E90FF;
+    }
+
+    div.containe.div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    #button {
+        padding: 10px 15px;
+        font-size: 17px;
+        color: white;
+        background-color: mediumseagreen;
+        border: 0;
+        border-radius: 5px;
+    }
+
+        #button:hover {
+            transform: translateY(-5px);
+            transition: 1s;
+        }
+
+    span {
+        margin-left: 5px;
+        color: white;
+    }
+</style>

@@ -1,0 +1,68 @@
+﻿@model NOPAINNOGAIN.Models.Comentario
+
+@{
+    ViewData["Title"] = "Create";
+}
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="modal-header">
+    <h4 class="modal-title" style="text-align: center">Deixe seu Comentário</h4>
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">x</span><span class="sr-only">Fechar</span>
+    </button>
+</div>
+<h6 style="font-size: 18px" class="text-center">Fale o que você achou do nosso sistema</h6>
+
+<form class="form" asp-action="Create">
+    <div class="modal-body">
+ <input asp-for="Nome" placeholder="Nome" class="form-control" />
+ <input id="comentario" asp-for="Comentarios" placeholder="Comentario..." class="form-control" />
+        <div class="modal-footer">
+            <div class="col-md-offset-5 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="button" value="Fechar" class="btn btn-dark" data-dismiss="modal" />
+               
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    .form {
+        width: 100%;
+        min-height: 50vh;
+        background-image: url(https://images.pexels.com/photos/1045534/pexels-photo-1045534.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .form input {
+            margin-top: 15px;
+
+        }
+
+        #comentario{
+            height: 100px;
+        }
+
+    h4 {
+        font-size: 40pt;
+        font-weight: 300;
+        padding-top: 15px;
+        color: #ff8800a7;
+        font-family: 'Itim', cursive;
+        font-family: 'Rubik Wet Paint', cursive;
+    }
+
+    #criar {
+        font-weight: 300;
+        padding-top: 15px;
+        color: white;
+        font-family: 'Itim', cursive;
+        font-family: 'Rubik Wet Paint', cursive;
+    }
+</style>
+
+

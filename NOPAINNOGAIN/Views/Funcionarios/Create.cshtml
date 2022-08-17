@@ -1,0 +1,125 @@
+﻿@model NOPAINNOGAIN.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Adicionar";
+}
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<h1 style="padding-top: 30px">@ViewData["Title"]</h1>
+
+<h4>Funcionario</h4>
+<div class="row">
+    <div class="col-md-10">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                @Html.TextBox("Nome", "", new { @class = "Form-Control", @id = "nome" })
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Documento" class="control-label"></label>
+                @Html.TextBox("Documento", "", new { @class = "Form-Control", @id = "documento" })
+                <span asp-validation-for="Documento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagemUpload" class="control-label"></label>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ImagemUpload" asp-for="ImagemUpload" />
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="ImagemUpload"></label>
+                    <label style="display: none" id="img_nome"></label>
+                </div>
+
+                <span asp-validation-for="ImagemUpload" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoFuncionario" class="control-label"></label> <br />
+                <input type="radio" value="1" asp-for="TipoFuncionario" checked /> Pessoa Física <br />
+                <input type="radio" value="2" asp-for="TipoFuncionario" checked /> Pessoa Jurídica <br />
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="control-label"></label>
+                @Html.TextBox("DataNascimento", "", new { @type = "date", @class = "Form-Control", @id = "dataNascimento" })
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salario" class="control-label"></label>
+                @Html.TextBox("Salario", "", new { @class = "Form-Control", @id = "salario" })
+                <span asp-validation-for="Salario" class="text-danger"></span>
+            </div>
+            <h4>Endereço</h4>
+            <partial name="_Endereco" />
+
+            <div class="form-group">
+                <a class="btn btn-info" asp-action="Index"><span class="fa fa-arrow-left"></span></a>
+                <input id="salvar" type="submit" value="Adicionar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    #nome,
+    #documento,
+    #dataNascimento,
+    #salario {
+        width: 300px;
+        height: 38px;
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+</style>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js" integrity="sha512-hAJgR+pK6+s492clbGlnrRnt2J1CJK6kZ82FZy08tm6XG2Xl/ex9oVZLE6Krz+W+Iv4Gsr8U2mGMdh0ckRH61Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $("#ImagemUpload").change(function () {
+            $("#img_nome").text(this.files[0].name);
+            $("#img_nome")[0].style.display = 'block';
+        });
+
+        $("#ImagemUpload").attr("data-val", "true");
+        $("#ImagemUpload").attr("data-val-required", "Preencha o campo Imagem");
+    </script>
+    <script>
+        BuscaCep();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#documento").mask("000.000.000-00", { "placeholder": "___.___.___-__" });
+        })
+    </script>
+
+    @*<script>
+            $(document).ready(function () {
+
+                $("#cep").mask("00000-000");
+            })
+        </script>*@
+}
+
+
+<style>
+    body {
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 6%, rgba(0,160,255,0.10997902579000352) 100%);
+</style>
+
+
+

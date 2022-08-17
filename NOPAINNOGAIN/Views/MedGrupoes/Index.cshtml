@@ -1,0 +1,253 @@
+﻿
+@model NOPAINNOGAIN.Models.MedGrupo
+
+@using (Html.BeginForm("EnviaEmail", "MedGrupoes", FormMethod.Post))
+{
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - SistemaFinanceiroProver</title>
+        <link rel="shortcut icon" href="~/imagens/icones-de-dinheiro.png" type="image/x-icon">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+
+    <body>
+        @if (TempData["mensagemErro"] != null)
+        {
+            <div class="alert alert-primary alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+                @TempData["mensagemErro"]
+            </div>
+        }
+        <div class="titulo">
+            <h1>Calculo Porcentagem Da MedGrupo</h1>
+        </div>
+        <div class="containe">
+            <form>
+                Digite seu Nome:
+                @Html.TextBox("Nome", "", new { @class = "Form-Control", @id = "Nome"})
+            </form>
+            Qual o valor a ser Dividido? R$
+            @Html.TextBox("Valor", "", new { @class = "Form-Control", @id = "valor"})
+            <div style="margin-top: 15px">
+                <button id="button"><ion-icon style="padding-top: 5px; font-size: 30px" name="play-outline"></ion-icon></button><span></span>
+            </div>
+
+            <form>
+                RM - 9.92% =
+                <span id="RM"></span>
+            </form>
+            <form>
+                RMED - 10.08% =
+                <span id="RMED"></span>
+            </form>
+            <form>
+                MEDYKLIN - 20.33% =
+                <span id="MEDYKLIN"></span>
+            </form>
+            <form>
+                MEDYN - 19.34% =
+                <span id="MEDYN"></span>
+            </form>
+            <form>
+                MEDWRITERS - 20.67% =
+                <span id="MEDWRITERS"></span>
+            </form>
+            <form>
+                MEDERI - 19.66% =
+                <span id="MEDERI"></span>
+            </form>
+
+        </div>
+        <script>
+            const valor = document.getElementById("valor")
+            const valorRM = document.getElementById("RM")
+            const valorRMED = document.getElementById("RMED")
+            const valorMEDYKLIN = document.getElementById("MEDYKLIN")
+            const valorMEDYN = document.getElementById("MEDYN")
+            const valorMEDWRITERS = document.getElementById("MEDWRITERS")
+            const valorMEDERI = document.getElementById("MEDERI")
+            const Calcular = document.getElementById("button")
+
+            var porcentagemRM = 9.92 / 100
+            var porcentagemRMED = 10.08 / 100
+            var porcentagemMEDYKLIN = 20.33 / 100
+            var porcentagemMEDYN = 19.34 / 100
+            var porcentagemMEDWRITERS = 20.67 / 100
+            var porcentagemMEDERI = 19.66 / 100
+
+            Calcular.addEventListener("click", function () {
+                var calculoRM = (porcentagemRM) * Number(valor.value);
+                var calculoRMED = (porcentagemRMED) * Number(valor.value);
+                var calculoMEDYKLIN = (porcentagemMEDYKLIN) * Number(valor.value);
+                var calculoMEDYN = (porcentagemMEDYN) * Number(valor.value);
+                var calculoMEDWRITERS = (porcentagemMEDWRITERS) * Number(valor.value);
+                var calculoMEDERI = (porcentagemMEDERI) * Number(valor.value);
+
+                valorRM.innerHTML = calculoRM.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                valorRMED.innerHTML = calculoRMED.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                valorMEDYKLIN.innerHTML = calculoMEDYKLIN.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                valorMEDYN.innerHTML = calculoMEDYN.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                valorMEDWRITERS.innerHTML = calculoMEDWRITERS.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                valorMEDERI.innerHTML = calculoMEDERI.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
+            })
+
+        </script>
+    </body>
+
+
+</html>
+}
+
+<style>
+    #valor {
+        width: 400px;
+        height: 47px;
+        display: block;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    #Nome {
+        width: 400px;
+        height: 47px;
+        display: block;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    body {
+        /*        display: block;
+        width: 100%;
+        min-height: 100vh;
+        place-items: center;*/
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 23%, rgba(0,160,255,0.4265056364342612) 100%);
+        /*        background-position: center;
+        background-size: cover;
+        position: absolute;*/
+    }
+
+    div.containe {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: #0066ff61;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 5px 5px 5px rgb(22, 40, 76);
+        padding-bottom: 80px;
+    }
+
+    .nome {
+        display: inline-block;
+        display: inline;
+        float: left
+    }
+
+
+    body h1 {
+        margin-bottom: 15px;
+        text-align: center;
+        color: rgb(39, 38, 35);
+    }
+
+    div.containe {
+        width: 100%;
+        background: #3f8cffe6;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 5px 5px 5px rgb(22, 40, 76);
+        padding-bottom: 80px;
+    }
+
+        div.containe:hover {
+            -webkit-animation: swing 1s ease;
+            animation: swing 1s ease;
+            -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+        }
+
+    div.containe {
+        font-size: 22px;
+        color: white;
+    }
+
+        div.containe form {
+            align-items: center;
+            justify-content: center;
+            padding-top: 15px;
+            font-size: 25px;
+        }
+
+    .form-control {
+        font-size: 20px;
+        padding: 10px 0;
+        text-align: center;
+        color: rgb(80, 80, 80);
+        max-width: 150px;
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 1px solid rgb(150, 150, 150);
+        outline: 0;
+    }
+
+    div.containe form input:hover,
+    div.containe form input:focus,
+    div.containe form input:valid {
+        border: 1px solid #1E90FF;
+    }
+
+    div.containe.div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    #button {
+        padding: 10px 15px;
+        width: 15%;
+        font-size: 17px;
+        color: white;
+        background-color: mediumseagreen;
+        border: 0;
+        border-radius: 5px;
+    }
+
+        #button:hover {
+            transform: translateY(-5px);
+            transition: 1s;
+        }
+
+    span {
+        margin-left: 5px;
+    }
+</style>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+<script>
+    $("#Nome").attr("data-val", "true");
+    $("#valor").attr("data-val", "true");
+</script>

@@ -1,0 +1,47 @@
+﻿@page
+@model RegisterConfirmationModel
+ 
+
+<h1 style="padding-top: 50px; font-size: 50px">Registro Confirmado</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p>Click aqui abaixo para confirmar sua conta</p>
+        <img src="~/Imagem(Login)/right-drawn-arrow.png" class="seta" />
+        <a id="confirm-link" href="@Model.EmailConfirmationUrl"><span style="color: rgba(168, 102, 255, 0.904); font-size: 40px; " class="fa fa-user-check"></span></a>
+    }
+    else
+    {
+        <p>
+            Please check your email to confirm your account.
+        </p>
+    }
+}
+<style>
+    body {
+        background-color: #87CEFA;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+    p {
+        font-size: 25px;
+    }
+
+    .seta {
+        transform: rotate(-15deg);
+        position: relative;
+        left: 200px;
+        max-width: 275px;
+        max-height: 275px;
+    }
+
+    a {
+        position: relative;
+        left: 300px;
+        top: 80px;
+    }
+</style>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

@@ -1,0 +1,105 @@
+﻿@model NOPAINNOGAIN.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Editar " + Model.Nome;
+}
+
+<h1 style="padding-top: 40px">@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" style="font-size: 18px; padding-top: 15px">
+                <label asp-for="Nome" class="control-label font-weight-bolder"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="font-size: 18px; padding-top: 15px">
+                <label asp-for="Documento" class="control-label font-weight-bolder"></label>
+                <input asp-for="Documento" class="form-control" />
+                <span asp-validation-for="Documento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="font-size: 18px; padding-top: 15px ">
+                <label>Foto Atual</label><br />
+                <img src="~/imagens/@Model.Imagem" alt="@Model.Imagem" style="width: 175px; height: 175px" />
+            </div>
+            <div class="form-group" style="font-size: 18px; padding-top: 15px">
+                <label asp-for="ImagemUpload" class="control-label"></label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ImagemUpload" asp-for="ImagemUpload" />
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="ImagemUpload"></label>
+                    <label style="display: none" id="img_nome"></label>
+                </div>
+            </div>
+
+            <div class="form-group" style="font-size: 18px; padding-top: 15px">
+                <label asp-for="TipoFuncionario" class="control-label font-weight-bolder"></label>
+                <div>
+                    <input type="radio" value="1" asp-for="TipoFuncionario" checked="@((int)Model.TipoFuncionario == 1)" /> Pessoa Física <br />
+                    <input type="radio" value="2" asp-for="TipoFuncionario" checked="@((int)Model.TipoFuncionario == 2)" /> Pessoa Jurídica <br />
+                </div>
+            </div>
+
+            <div class="form-group" style="font-size: 18px; padding-top: 15px">
+                <label asp-for="DataNascimento" class="control-label font-weight-bolder"></label>
+                <input type="date" asp-for="DataNascimento" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="font-size: 18px; padding-top: 15px">
+                <label asp-for="Salario" class="control-label font-weight-bolder"></label>
+                <input asp-for="Salario" class="form-control" />
+                <span asp-validation-for="Salario" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <a class="btn btn-info" asp-action="Index"><span class="fa fa-arrow-left"></span></a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="EnderecoTarget" style="padding-top: 15px">
+    <partial name="_DetalhesEnderecos" />
+</div>
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $("#ImagemUpload").change(function () {
+            $("#img_nome").text(this.files[0].name);
+            $("#img_nome")[0].style.display = 'block';
+        });
+
+        //$("#ImagemUpload").attr("data-val", "true");
+        //$("#ImagemUpload").attr("data-val-required", "Preencha o campo Imagem");
+    </script>
+    <script>
+        BuscaCep();
+    </script>
+    <script>
+        $(document).ready(function () {
+            AjaxModal();
+        });
+    </script>
+}
+
+<style>
+    body {
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 6%, rgba(0,160,255,0.10997902579000352) 100%);
+</style>

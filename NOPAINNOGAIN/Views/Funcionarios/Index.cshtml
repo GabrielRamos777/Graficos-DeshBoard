@@ -1,0 +1,170 @@
+﻿@model IEnumerable<NOPAINNOGAIN.Models.Funcionario>
+
+<div class="cardBox">
+    <div class="card" id="card-usuario">
+        <div>
+            <div class="numbers">@ViewBag.usuarios<ion-icon style="color: black; float: right; font-size: 1.1em" name="person-add-outline"></ion-icon></div>
+            <div class="cardName">Usuários Logado</div>
+        </div>
+    </div>
+    <div class="card" id="card">
+        <div>
+            <div class="numbers">@ViewBag.resultado<ion-icon style="color: black; float: right; font-size: 1.1em;" name="bar-chart-outline"></ion-icon></div>
+            <div class="cardName">Funcionários Cadastrados</div>
+        </div>
+    </div>
+    <div class="card" id="card-medgrupo">
+        <div>
+            <div class="numbers">@ViewBag.cliques<ion-icon style="color: black; float: right; font-size: 1.1em" name="calculator-outline"></ion-icon></div>
+            <div class="cardName">MedGrupo Ativo</div>
+        </div>
+    </div>
+    <div class="card" id="card-comentarios">
+        <div>
+            <div class="numbers">@ViewBag.comentarios<ion-icon style="color: black; float: right; font-size: 1.1em" name="chatbubble-outline"></div>
+            <div class="cardName">Comentarios Views</div>
+        </div>
+    </div>
+</div>
+<canvas class="line-chart"></canvas>
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    const card = document.getElementById("card");
+
+    card.addEventListener("click", function () {
+        window.location = "/Funcionarios/Index2"
+    });
+</script>
+<script>
+    const cardmedgrupo = document.getElementById("card-medgrupo");
+
+    cardmedgrupo.addEventListener("click", function () {
+        window.location = "/MedGrupoes/Index"
+    });
+</script>
+<script>
+    const cardcomentario = document.getElementById("card-comentarios");
+
+    cardcomentario.addEventListener("click", function () {
+        window.location = "/Comentarios/Index"
+    });
+</script>
+@*<script>
+    const cardusuario = document.getElementById("card-usuario");
+
+    cardusuario.addEventListener("click", function () {
+        window.location = "/MedGrupoes/Index"
+    });
+</script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script type="text/javascript">
+    var ctx = document.getElementsByClassName("line-chart");
+
+    // type, data e options
+
+    var chartGraph = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            labels: [
+                'Abril',
+                'Mai',
+                'Jun',
+                'Jul',
+                'Ago',
+                'Set',
+                'Out'
+            ],
+            datasets: [{
+                type: 'bar',
+                label: 'Usuarios Logados',
+                data: [@ViewBag.usuarios],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(37, 186, 255, 0.73)'
+            }, {
+                type: 'bar',
+                label: 'Funcionarios Cadastrados',
+                data: [@ViewBag.resultado],
+                fill: false,
+                borderColor: 'rgba(124, 37, 255, 0.73)',
+                 backgroundColor: 'rgba(124, 37, 255, 0.73)'
+
+            }, {
+                type: 'bar',
+                label: 'Calculo MedGrupo Ativo',
+                data: [@ViewBag.cliques],
+                fill: false,
+                borderColor: 'rgba(37, 77, 255, 0.73)',
+                backgroundColor: 'rgba(37, 77, 255, 0.73)'
+                },
+            {
+                type: 'bar',
+                label: 'Comentarios',
+                data: [@ViewBag.comentarios],
+                fill: false,
+                borderColor: 'rgba(255, 111, 0, 0.862)',
+                backgroundColor: 'rgba(255, 111, 0, 0.862)'
+            }]
+        }
+    });
+
+
+</script>
+<style>
+    #chart_div{
+       position: relative;
+       right: 200px;
+    }
+    body {
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 23%, rgba(0,160,255,0.4265056364342612) 100%);
+    }
+    .cardBox {
+        position: relative;
+        width: 100%;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);nav-down 
+        grid-gap: 30px;
+    }
+
+        .cardBox .card {
+            margin-bottom: 30px;
+            position: relative;
+            background: white;
+            padding: 20px; 
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            box-shadow: 0 7px 25px #00000084;
+        }
+
+            .cardBox .card .numbers {
+                position: relative;
+                font-weight: 500;
+                font-size: 2.5em;
+                color: rgb(29, 29, 255);
+            }
+
+            .cardBox .card .cardName {
+                color: #1d1c1cc3;
+                font-size: 1.1em;
+                margin-top: 5px;
+            }
+
+            .cardBox .card .iconBx {
+                font-size: 3.5em;
+            }
+
+            .cardBox .card:hover {
+                background: rgba(31, 42, 255, 0.79);
+            }
+
+                .cardBox .card:hover .numbers,
+                .cardBox .card:hover .cardName,
+                .cardBox .card:hover {
+                    color: white;
+                }
+</style>

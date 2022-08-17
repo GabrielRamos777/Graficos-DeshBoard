@@ -1,0 +1,60 @@
+﻿@model IEnumerable<NOPAINNOGAIN.Models.Funcionario>
+
+@{
+    ViewData["Title"] = "Lista Funcionario";
+}
+
+<h1 style="padding-top: 30px; color: black; text-align: center">@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-info" color: white;" asp-action="Create">Novo</a>
+</p>
+<table class="table table-hover" style="background-color: #ffffff81; border-radius: 10px;">
+    <thead style="background-color: #ffffff81 ">
+        <tr>
+            <th>
+               
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoFuncionario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 100px; height: 100px" />
+                </td>
+                <td style="padding-top: 30px; font-size: 17px">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td style="padding-top: 30px; font-size: 17px">
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td style="padding-top: 30px; font-size: 17px">
+                    @Html.DisplayFor(modelItem => item.TipoFuncionario)
+                </td>
+                <td class="text-right" ; style="padding-top: 30px; font-size: 17px">
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ID"><span class="fa fa-search"></span></a>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.ID"><span class="fa fa-pencil-alt"></span></a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID"><span class="fa fa-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<style>
+    body {
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 23%, rgba(0,160,255,0.4265056364342612) 100%);
+</style>

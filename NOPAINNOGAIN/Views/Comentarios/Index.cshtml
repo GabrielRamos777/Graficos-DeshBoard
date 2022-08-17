@@ -1,0 +1,120 @@
+﻿@model IEnumerable<NOPAINNOGAIN.Models.Comentario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Comentarios</h1>
+
+<p>
+    <a id="criar" class="btn btn-secondary" data-modal="" asp-action="Create">Adicionar<ion-icon style="font-size: 23px; padding-left: 7px" name="chatbox-ellipses-outline"></ion-icon></a>
+</p>
+<table class="table table-hover" style="background-color: #4b525da7; color:white; ">
+
+    <tbody>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentarios)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Comentarios)
+                </td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+            <h5 style="margin-left: 15px;">Aperte Enter para fluir <span style="margin-left: 10px;" class="fa fa-arrow-right"></span><span style="margin-left: 17px;" class="fa fa-music"></span></h5>
+            <audio id="audio" src="~/Imagem(Login)/The_Notorious_B.I.G._-_Big_Poppa.mp3"></audio>
+            <button id="button2"></button>
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        width: 100%;
+        min-height: 100vh;
+        background-image: url(https://images.pexels.com/photos/1045534/pexels-photo-1045534.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 40pt;
+        font-weight: 300;
+        padding-top: 15px;
+        color: #ff8800a7;
+        font-family: 'Itim', cursive;
+        font-family: 'Rubik Wet Paint', cursive;
+    }
+
+    #criar {
+        font-weight: 300;
+        padding-top: 15px;
+        color: white;
+        font-family: 'Itim', cursive;
+        font-family: 'Rubik Wet Paint', cursive;
+    }
+</style>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        $(document).ready(function () {
+            AjaxModal();
+        });
+    </script>
+
+    <script>
+        //const button = document.getElementById("button2")
+        //button.addEventListener("click", function (audio) {
+        //    const audio = document.getElementById("audio")
+        //    audio.play();
+        //})
+        function play() {
+            player.play();
+            button.textContent = "Pause";
+        }
+
+        function pause() {
+            player.pause();
+            button.textContent = "Play";
+        }
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                $("#button2").click()
+                const audio = document.getElementById("audio")
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                //audio.play();
+                //audio.currentTime = 1.10;
+            }
+        });
+
+        $('button').click(function (e) {
+        });
+    </script>
+
+}
