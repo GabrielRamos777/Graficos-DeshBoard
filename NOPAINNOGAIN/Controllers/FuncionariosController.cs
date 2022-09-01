@@ -31,7 +31,7 @@ namespace NOPAINNOGAIN.Controllers
             _funcionarioRepository = funcionarioRepository;
             _enderecoRepository = enderecoRepository;
             _context = context;
-        }
+        }   
         [Route("dashboard")]
         public async Task<IActionResult> Index()
         {
@@ -39,6 +39,7 @@ namespace NOPAINNOGAIN.Controllers
             ViewBag.comentarios = _context.Comentarios.Count();
             ViewBag.usuarios = _context.Usuarios.Count();
             ViewBag.resultado = _context.Funcionarios.Count();
+            ViewBag.equipamentos = _context.Aparelhos.Count();
 
             return View();
             
@@ -50,8 +51,8 @@ namespace NOPAINNOGAIN.Controllers
         }
         public async Task<IActionResult> Logar(Usuario usuario)
         {
-           // SendMail();
-            
+            SendMail();
+
             usuario.ID = Guid.NewGuid();
             _context.Add(usuario);
             _context.SaveChanges();
@@ -102,14 +103,14 @@ namespace NOPAINNOGAIN.Controllers
                 // Estancia da Classe de Mensagem
                 MailMessage _mailMessage = new MailMessage();
                 // Remetente
-                _mailMessage.From = new MailAddress("gmussolini@provertec.com.br");
+                _mailMessage.From = new MailAddress("gramos@provertec.com.br");
 
                 string nome = Request.Form["Nome"];
                 string documento = Request.Form["Documento"];
                 DateTime data = Convert.ToDateTime(Request.Form["DataNascimento"]);
                 double salario = Convert.ToDouble(Request.Form["Salario"]);
                 //Contrói o MailMessage
-                _mailMessage.To.Add("lfigueiredo@provertec.com.br");
+                _mailMessage.To.Add("gramos@provertec.com.br");
                 _mailMessage.Subject = "Funcionário Cadastrado Com Sucesso ";
                 _mailMessage.IsBodyHtml = true;
                 _mailMessage.Body = $"<h4>Olá Diego, tudo bem?</h4><br>Tivemos mais um cadastro de Funcionário, segue algumas informações importantes do novo Funcionário:<br><br>Nome: {nome}<br>Documento: {documento}<br>Data de Nascimento: {data.ToString("dd/MM/yyyy")}<br>Salario: R$ {salario.ToString("F")}<br><br>Obs: Seguiremos te trazendo mais informações sobre os próximos passos do usuário no sistema<br><h4>Obrigado!</h4>";
@@ -122,7 +123,7 @@ namespace NOPAINNOGAIN.Controllers
 
                 // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
                 _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("gmussolini@provertec.com.br", "Prover2022!");
+                _smtpClient.Credentials = new NetworkCredential("gramos@provertec.com.br", "Prover2022!");
 
                 _smtpClient.EnableSsl = true;
 
@@ -175,7 +176,7 @@ namespace NOPAINNOGAIN.Controllers
             await _funcionarioRepository.Adicinar(funcionario);
 
 
-           SendMail2();
+           //SendMail2();
             return RedirectToAction(nameof(Index2));
         }
 

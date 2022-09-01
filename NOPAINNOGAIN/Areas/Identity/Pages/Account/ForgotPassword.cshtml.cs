@@ -30,8 +30,8 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required (ErrorMessage = "O campo {0} é obrigatório")]
+            [EmailAddress (ErrorMessage = "O campo {0} é obrigatório")]
             public string Email { get; set; }
         }
 
@@ -58,8 +58,8 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Redefinir senha",
+                    $"Redefinir sua senha por <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

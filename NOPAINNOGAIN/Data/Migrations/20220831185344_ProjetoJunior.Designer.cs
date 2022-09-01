@@ -10,15 +10,15 @@ using NOPAINNOGAIN.Data;
 namespace NOPAINNOGAIN.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220410174351_initial")]
-    partial class initial
+    [Migration("20220831185344_ProjetoJunior")]
+    partial class ProjetoJunior
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -323,6 +323,17 @@ namespace NOPAINNOGAIN.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Funcionarios");
+                });
+
+            modelBuilder.Entity("NOPAINNOGAIN.Models.Logado", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Logados");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.MedGrupo", b =>
