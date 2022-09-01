@@ -69,7 +69,7 @@ namespace NOPAINNOGAIN.Controllers
                 TempData["MEDWRITERS"] = MEDWRITERS.ToString("F");
                 TempData["MEDERI"] = MEDERI.ToString("F");
                 TempData["Resultado"] = valor.ToString();
-                SendMail1(); 
+                //SendMail1(); //descomentar quando a função do enviar e-mail, estiver descomentada
                 medGrupoes.ID = Guid.NewGuid();
                 _context.Add(medGrupoes);
                 _context.SaveChanges();
@@ -82,55 +82,56 @@ namespace NOPAINNOGAIN.Controllers
                 return RedirectToAction("Index", "MedGrupoes");
             }
         }
-        [HttpPost]
-        public bool SendMail1()
-        {
-            try
-            {
 
-                string nome = Request.Form["Nome"];
-                string valor = Request.Form["Valor"];
-                double RM = (Convert.ToDouble(valor) * (9.92 / 100));
-                double RMED = (Convert.ToDouble(valor) * (10.08 / 100));
-                double MEDYKLIN = (Convert.ToDouble(valor) * (20.33 / 100));
-                double MEDYN = (Convert.ToDouble(valor) * (19.34 / 100));
-                double MEDWRITERS = (Convert.ToDouble(valor) * (20.67 / 100));
-                double MEDERI = (Convert.ToDouble(valor) * (19.66 / 100));
-                // Estancia da Classe de Mensagem
-                MailMessage _mailMessage = new MailMessage();
-                // Remetente
-                _mailMessage.From = new MailAddress("gmussolini@provertec.com.br");
+        //[HttpPost]
+        //public bool SendMail1()
+        //{
+        //    try
+        //    {
 
-                // Destinatario seta no metodo abaixo
+        //        string nome = Request.Form["Nome"];
+        //        string valor = Request.Form["Valor"];
+        //        double RM = (Convert.ToDouble(valor) * (9.92 / 100));
+        //        double RMED = (Convert.ToDouble(valor) * (10.08 / 100));
+        //        double MEDYKLIN = (Convert.ToDouble(valor) * (20.33 / 100));
+        //        double MEDYN = (Convert.ToDouble(valor) * (19.34 / 100));
+        //        double MEDWRITERS = (Convert.ToDouble(valor) * (20.67 / 100));
+        //        double MEDERI = (Convert.ToDouble(valor) * (19.66 / 100));
+        //        // Estancia da Classe de Mensagem
+        //        MailMessage _mailMessage = new MailMessage();
+        //        // Remetente
+        //        _mailMessage.From = new MailAddress("gmussolini@provertec.com.br");
 
-                //Contrói o MailMessage
-                _mailMessage.To.Add("lfigueiredo@provertec.com.br");
-                _mailMessage.Subject = "Porcentagem MedGrupo foi acionada";
-                _mailMessage.IsBodyHtml = true;
-                _mailMessage.Body = $"<h4>Olá Diego, tudo bem?</h4><br>Passando para informar que o Usuário {nome}, acabou de acessar o cálculo MedGrupo:<br><br>O valor de Entrada do {nome}: R${valor}<br>RM: R${RM.ToString("F")}<br>RMED: R${RMED.ToString("F")}<br>MEDYKLIN: R${MEDYKLIN.ToString("F")}<br>MEDYN: R${MEDYN.ToString("F")}<br>MEDWRITERS: R${MEDWRITERS.ToString("F")}<br>MEDERI: R${MEDERI.ToString("F")}<br><br><br>Seguiremos lhe trazendo mais informações sobre o usuário no sistema<br><h4>Obrigado!</h4>";
+        //        // Destinatario seta no metodo abaixo
 
-                //CONFIGURAÇÃO COM PORTA
-                SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
+        //        //Contrói o MailMessage
+        //        _mailMessage.To.Add("lfigueiredo@provertec.com.br");
+        //        _mailMessage.Subject = "Porcentagem MedGrupo foi acionada";
+        //        _mailMessage.IsBodyHtml = true;
+        //        _mailMessage.Body = $"<h4>Olá Diego, tudo bem?</h4><br>Passando para informar que o Usuário {nome}, acabou de acessar o cálculo MedGrupo:<br><br>O valor de Entrada do {nome}: R${valor}<br>RM: R${RM.ToString("F")}<br>RMED: R${RMED.ToString("F")}<br>MEDYKLIN: R${MEDYKLIN.ToString("F")}<br>MEDYN: R${MEDYN.ToString("F")}<br>MEDWRITERS: R${MEDWRITERS.ToString("F")}<br>MEDERI: R${MEDERI.ToString("F")}<br><br><br>Seguiremos lhe trazendo mais informações sobre o usuário no sistema<br><h4>Obrigado!</h4>";
 
-                //CONFIGURAÇÃO SEM PORTA'   1      
-                // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
+        //        //CONFIGURAÇÃO COM PORTA
+        //        SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
 
-                // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
-                _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("gmussolini@provertec.com.br", "Prover2022!");
+        //        //CONFIGURAÇÃO SEM PORTA'   1      
+        //        // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
 
-                _smtpClient.EnableSsl = true;
+        //        // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
+        //        _smtpClient.UseDefaultCredentials = false;
+        //        _smtpClient.Credentials = new NetworkCredential("gmussolini@provertec.com.br", "Prover2022!");
 
-                _smtpClient.Send(_mailMessage);
+        //        _smtpClient.EnableSsl = true;
 
-                return true;
+        //        _smtpClient.Send(_mailMessage);
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        return true;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         private bool MedGrupoExists(Guid id)
         {
             return _context.MedGrupo.Any(e => e.ID == id);

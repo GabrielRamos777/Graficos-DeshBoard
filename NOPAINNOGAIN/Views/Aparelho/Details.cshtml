@@ -1,0 +1,48 @@
+﻿@model NOPAINNOGAIN.Models.Aparelho
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Aparelho</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Grupomuscular)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Grupomuscular)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Preco)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tempo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tempo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.tempoFim)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.tempoFim)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

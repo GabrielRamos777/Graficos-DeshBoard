@@ -20,5 +20,6 @@ namespace NOPAINNOGAIN.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Logado> Logados { get; set; }
+        public DbSet<Aparelho> Aparelhos { get; set; }
     }
 }

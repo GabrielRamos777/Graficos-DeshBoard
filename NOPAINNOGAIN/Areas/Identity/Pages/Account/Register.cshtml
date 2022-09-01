@@ -4,70 +4,74 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-
-<div>
+<body class="img-fundo-login">
     <div>
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div class="main-login">
-                <div class="left-login">
-                    <h1>Crie sua nova Conta!</h1>
-                    <img src="~/Imagem(Login)/visionary-technology-animate (2).svg" alt="astronauta" />
-                </div>
-                <div class="rigth-login">
-                    <div class="card-login">
-                        <h1>REGISTRE</h1>
-                        <div class="form-group">
-                            <label asp-for="Input.Cpf"></label>
-                            <input asp-for="Input.Cpf" id="CPF" class="form-control" />
-                            <span asp-validation-for="Input.Cpf" class="text-danger"></span>
+        <div>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class="main-login">
+                    @*<div class="left-login">
+                            <h1>Crie sua nova Conta!</h1>
+                            <img src="~/Imagem(Login)/visionary-technology-animate (2).svg" alt="astronauta" />
+                        </div>*@
+                    <div class="rigth-login">
+                        <div class="card-login">
+                            <h1>REGISTRE</h1>
+                            <div class="form-group">
+                                <label asp-for="Input.Cpf"></label>
+                                <input asp-for="Input.Cpf" id="cpf" class="form-control" onblur="funcaoCPF((this)" />
+                                <span asp-validation-for="Input.Cpf" class="text-danger">O CPF é inválido.</span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.Password"></label>
+                                <input asp-for="Input.Password" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.ConfirmPassword"></label>
+                                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <button id="button" type="submit" class="btn btn-primary" onclick="validarCPF()">CRIAR</button>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Password"></label>
-                            <input asp-for="Input.Password" class="form-control" />
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.ConfirmPassword"></label>
-                            <input asp-for="Input.ConfirmPassword" class="form-control" />
-                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                        </div>
-                        <button id="button" type="submit" class="btn btn-primary">CRIAR</button>
                     </div>
                 </div>
-            </div>
-            <audio id="audio" src="~/Imagem(Login)/Justin_Bieber_-_Love_Yourself_(Jesusful.com).mp3"></audio>
-            <button id="button2">?</button>
-        </form>
-    </div>
-    <div>
-        <section>
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                <audio id="audio" src="~/Imagem(Login)/Justin_Bieber_-_Love_Yourself_(Jesusful.com).mp3"></audio>
+                <button id="button2">?</button>
+            </form>
+        </div>
+        <div>
+            <section>
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
                         <div>
                             <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
                             </p>
                         </div>
-                    </form>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
                 }
-            }
-        </section>
+            </section>
+        </div>
     </div>
-</div>
+</body>
+<script src="~/js/site.js"></script>
+
+
 <style>
 
     body {
@@ -112,7 +116,7 @@
         align-items: center;
     }
 
-    .card-login {
+    /*.card-login {
         width: 100%;
         height: 65vh;
         display: flex;
@@ -129,7 +133,7 @@
             color: #DFDFDF;
             font-weight: 800;
             margin: 0;
-        }
+        }*/
 
     .textfield {
         width: 50%;
