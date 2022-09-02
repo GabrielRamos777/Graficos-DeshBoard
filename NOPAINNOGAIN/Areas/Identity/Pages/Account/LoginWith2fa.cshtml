@@ -1,0 +1,58 @@
+﻿@page
+@model LoginWith2faModel
+@{
+    ViewData["Title"] = "Autenticação de dois fatores";
+
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<body class="img-login">
+    <div class="fundo2fa text-center">
+        <h1>@ViewData["Title"]</h1>
+        <hr />
+
+        <p>Seu login está protegido com um aplicativo autenticador. Digite seu código de autenticador abaixo.</p>
+        <div class="">
+            <div class="d-flex justify-content-center">
+                <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+                    <input asp-for="RememberMe" type="hidden" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.TwoFactorCode"></label>
+                        <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMachine">
+                                <input asp-for="Input.RememberMachine" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMachine)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Conecte-se</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <p>
+            Não tem acesso ao seu dispositivo autenticador? Você pode
+            <a id="recovery-code-login" asp-page="./LoginWithRecoveryCode" asp-route-returnUrl="@Model.ReturnUrl">faça login com um código de recuperação   </a>.
+        </p>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<style>
+    .fundo2fa {
+        background-color: rgba(255 255 255 / 50%);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10vh;
+        border-radius: 5px;
+        width: 70%;
+    }
+</style>

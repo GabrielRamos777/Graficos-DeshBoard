@@ -3,22 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NOPAINNOGAIN.Data;
 
-namespace NOPAINNOGAIN.Data.Migrations
+namespace NOPAINNOGAIN.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220831190428_Aparelhos")]
-    partial class Aparelhos
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.15")
+                .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -241,9 +239,12 @@ namespace NOPAINNOGAIN.Data.Migrations
                     b.Property<DateTime>("Tempo")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("tempoFim")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ID");
 
-                    b.ToTable("Aparelhos");
+                    b.ToTable("AparelhosGR");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.Comentario", b =>
@@ -262,7 +263,7 @@ namespace NOPAINNOGAIN.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Comentarios");
+                    b.ToTable("ComentariosGR");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.Endereco", b =>
@@ -312,7 +313,7 @@ namespace NOPAINNOGAIN.Data.Migrations
                     b.HasIndex("FuncionarioId")
                         .IsUnique();
 
-                    b.ToTable("Enderecos");
+                    b.ToTable("EnderecosGR");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.Funcionario", b =>
@@ -347,7 +348,7 @@ namespace NOPAINNOGAIN.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Funcionarios");
+                    b.ToTable("FuncionariosGR");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.Logado", b =>
@@ -358,7 +359,7 @@ namespace NOPAINNOGAIN.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Logados");
+                    b.ToTable("LogadosGR");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.MedGrupo", b =>
@@ -369,7 +370,7 @@ namespace NOPAINNOGAIN.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("MedGrupo");
+                    b.ToTable("MedGrupoGR");
                 });
 
             modelBuilder.Entity("NOPAINNOGAIN.Models.Usuario", b =>
@@ -380,7 +381,7 @@ namespace NOPAINNOGAIN.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("UsuariosGR");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

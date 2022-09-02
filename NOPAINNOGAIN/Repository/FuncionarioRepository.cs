@@ -20,7 +20,7 @@ namespace NOPAINNOGAIN.Data.Repository
 
         public async Task<Funcionario> ObterFuncionarioEndereco(Guid id)
         {
-            return await Db.Funcionarios.AsNoTracking().Include(f => f.Endereco)
+            return await Db.FuncionariosGR.AsNoTracking().Include(f => f.Endereco)
                 .FirstOrDefaultAsync(e => e.ID == id);
         }
     }
