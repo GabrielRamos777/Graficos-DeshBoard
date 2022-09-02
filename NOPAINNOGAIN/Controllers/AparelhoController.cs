@@ -24,7 +24,7 @@ namespace NOPAINNOGAIN.Controllers
         // GET: Aparelho
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Aparelhos.ToListAsync());
+            return View(await _context.AparelhosGR.ToListAsync());
         }
 
         // GET: Aparelho/Details/5
@@ -35,7 +35,7 @@ namespace NOPAINNOGAIN.Controllers
                 return NotFound();
             }
 
-            var aparelho = await _context.Aparelhos
+            var aparelho = await _context.AparelhosGR
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (aparelho == null)
             {
@@ -76,7 +76,7 @@ namespace NOPAINNOGAIN.Controllers
                 return NotFound();
             }
 
-            var aparelho = await _context.Aparelhos.FindAsync(id);
+            var aparelho = await _context.AparelhosGR.FindAsync(id);
             if (aparelho == null)
             {
                 return NotFound();
@@ -127,7 +127,7 @@ namespace NOPAINNOGAIN.Controllers
                 return NotFound();
             }
 
-            var aparelho = await _context.Aparelhos
+            var aparelho = await _context.AparelhosGR
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (aparelho == null)
             {
@@ -142,15 +142,15 @@ namespace NOPAINNOGAIN.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var aparelho = await _context.Aparelhos.FindAsync(id);
-            _context.Aparelhos.Remove(aparelho);
+            var aparelho = await _context.AparelhosGR.FindAsync(id);
+            _context.AparelhosGR.Remove(aparelho);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AparelhoExists(Guid id)
         {
-            return _context.Aparelhos.Any(e => e.ID == id);
+            return _context.AparelhosGR.Any(e => e.ID == id);
         }
     }
 }

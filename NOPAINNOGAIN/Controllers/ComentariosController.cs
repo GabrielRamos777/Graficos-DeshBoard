@@ -24,7 +24,7 @@ namespace NOPAINNOGAIN.Controllers
         // GET: Comentarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Comentarios.ToListAsync());
+            return View(await _context.ComentariosGR.ToListAsync());
         }
 
         // GET: Comentarios/Details/5
@@ -35,7 +35,7 @@ namespace NOPAINNOGAIN.Controllers
                 return NotFound();
             }
 
-            var comentario = await _context.Comentarios
+            var comentario = await _context.ComentariosGR
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (comentario == null)
             {
@@ -76,7 +76,7 @@ namespace NOPAINNOGAIN.Controllers
                 return NotFound();
             }
 
-            var comentario = await _context.Comentarios.FindAsync(id);
+            var comentario = await _context.ComentariosGR.FindAsync(id);
             if (comentario == null)
             {
                 return NotFound();
@@ -127,7 +127,7 @@ namespace NOPAINNOGAIN.Controllers
                 return NotFound();
             }
 
-            var comentario = await _context.Comentarios
+            var comentario = await _context.ComentariosGR
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (comentario == null)
             {
@@ -142,15 +142,15 @@ namespace NOPAINNOGAIN.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var comentario = await _context.Comentarios.FindAsync(id);
-            _context.Comentarios.Remove(comentario);
+            var comentario = await _context.ComentariosGR.FindAsync(id);
+            _context.ComentariosGR.Remove(comentario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ComentarioExists(Guid id)
         {
-            return _context.Comentarios.Any(e => e.ID == id);
+            return _context.ComentariosGR.Any(e => e.ID == id);
         }
     }
 }

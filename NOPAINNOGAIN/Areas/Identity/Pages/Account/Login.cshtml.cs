@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Google.Authenticator;
 
 namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
 {
@@ -22,14 +19,14 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, 
+        public LoginModel(SignInManager<IdentityUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-        } 
+        }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -44,10 +41,13 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            public string CPF { get; set; }
+            [Required(ErrorMessage = "O campo {0} é obrigatório")]
+            [Display(Name = "E-mail")]
+            [EmailAddress(ErrorMessage = "O campo {0} está inválido")]
+            public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "O campo {0} é obrigatório")]
+            [Display(Name = "Senha")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -75,16 +75,16 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+            //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.CPF, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false); // fazendo uma buscas de forma sincrona, ele irar pegar o input do email, input.password
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Usuário logado.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -93,15 +93,16 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Conta de usuário bloqueada.");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Email ou senha invalido! .");
                     return Page();
                 }
             }
+
 
             // If we got this far, something failed, redisplay form
             return Page();

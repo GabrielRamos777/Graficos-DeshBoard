@@ -18,7 +18,7 @@ namespace NOPAINNOGAIN.Data.Repository
         }
         public async Task<Endereco> ObterEnderecoPorFuncionario(Guid funcioanrioId)
         {
-            return await Db.Enderecos.AsNoTracking().FirstOrDefaultAsync(f => f.FuncionarioId == funcioanrioId);
+            return await Db.EnderecosGR.AsNoTracking().FirstOrDefaultAsync(f => f.FuncionarioId == funcioanrioId);
         }
 
       

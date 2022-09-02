@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<NOPAINNOGAIN.Models.Funcionario>
 
-<div class="cardBox">
+<div class="cardBox d-flex justify-content-around">
     <div class="card" id="card-usuario">
         <div>
             <div class="numbers">@ViewBag.usuarios<ion-icon style="color: black; float: right; font-size: 1.1em" name="person-add-outline"></ion-icon></div>
@@ -13,21 +13,15 @@
             <div class="cardName">Funcionários Cadastrados</div>
         </div>
     </div>
-    <div class="card" id="card-medgrupo">
+    @*<div class="card" id="card-medgrupo">
         <div>
             <div class="numbers">@ViewBag.cliques<ion-icon style="color: black; float: right; font-size: 1.1em" name="calculator-outline"></ion-icon></div>
             <div class="cardName">MedGrupo Ativo</div>
         </div>
-    </div>
-    @*<div class="card" id="card-comentarios">
-            <div>
-                <div class="numbers">@ViewBag.comentarios<ion-icon style="color: black; float: right; font-size: 1.1em" name="chatbubble-outline"></div>
-                <div class="cardName">Comentarios Views</div>
-            </div>
-        </div>*@
+    </div>*@
     <div class="card" id="card-equipamentos">
         <div>
-            <div class="numbers">@ViewBag.equipamentos<ion-icon style="color: black; float: right; font-size: 1.1em" name="chatbubble-outline"></div>
+            <div class="numbers">@ViewBag.equipamentos<ion-icon style="color: black; float: right; font-size: 1.1em" name="barbell-outline"></div>
             <div class="cardName">Equipamentos</div>
         </div>
     </div>
@@ -51,18 +45,10 @@
         window.location = "/MedGrupoes/Index"
     });
 </script>
-@*<script>
-        const cardcomentario = document.getElementById("card-comentarios");
-
-        cardcomentario.addEventListener("click", function () {
-            window.location = "/Comentarios/Index"
-        });
-    </script>*@
-
 <script>
-    const cardequipamentos = document.getElementById("card-equipamentos");
+    const cardcomentario = document.getElementById("card-equipamentos");
 
-    cardequipamentos.addEventListener("click", function () {
+    cardcomentario.addEventListener("click", function () {
         window.location = "/Aparelho/Index"
     });
 </script>
@@ -74,7 +60,6 @@
     });
 </script>*@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-
 <script type="text/javascript">
     var ctx = document.getElementsByClassName("line-chart");
 
@@ -114,43 +99,41 @@
                 borderColor: 'rgba(37, 77, 255, 0.73)',
                 backgroundColor: 'rgba(37, 77, 255, 0.73)'
                 },
-                {
-                    type: 'bar',
-                    label: 'Equipamentos',
-                    data: [@ViewBag.equipamentos],
-                    fill: false,
-                    borderColor: 'rgba(255, 111, 0, 0.862)',
-                    backgroundColor: 'rgba(255, 111, 0, 0.862)'
-                }]
+            {
+                type: 'bar',
+                label: 'Comentarios',
+                data: [@ViewBag.comentarios],
+                fill: false,
+                borderColor: 'rgba(255, 111, 0, 0.862)',
+                backgroundColor: 'rgba(255, 111, 0, 0.862)'
+            }]
         }
     });
 
 
 </script>
 <style>
-    #chart_div {
-        position: relative;
-        right: 200px;
+    #chart_div{
+       position: relative;
+       right: 200px;
     }
-
     body {
-        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 23%, rgba(0,160,255,0.4265056364342612) 100%);
+        background: linear-gradient(166deg, rgba(255,255,255,0.7346288857339811) 23%, rgba(0 160 255 / 0%) 100%);
     }
-
     .cardBox {
         position: relative;
         width: 100%;
         padding: 20px;
         display: grid;
-        grid-template-columns: repeat(4,1fr);
-        nav-down grid-gap: 30px;
+        grid-template-columns: repeat(4,1fr);nav-down 
+        grid-gap: 30px;
     }
 
         .cardBox .card {
             margin-bottom: 30px;
             position: relative;
             background: white;
-            padding: 20px;
+            padding: 20px; 
             border-radius: 20px;
             display: flex;
             justify-content: space-between;

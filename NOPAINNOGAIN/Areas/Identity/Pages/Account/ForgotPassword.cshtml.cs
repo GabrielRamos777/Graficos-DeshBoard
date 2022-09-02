@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Net.Mail;
+using System.Net;
 
 namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
 {
@@ -56,10 +58,31 @@ namespace NOPAINNOGAIN.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Redefinir senha",
-                    $"Redefinir sua senha por <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+                //Codigo de enviar para o email
+                // Estancia da Classe de Mensagem
+                MailMessage _mailMessage = new MailMessage();
+                // Remetente
+                _mailMessage.From = new MailAddress("gblzinhokk3@hotmail.com");
+
+                // Destinatario seta no metodo abaixo
+                //Contrói o MailMessage
+                _mailMessage.CC.Add(Input.Email);
+                _mailMessage.Subject = "Alerta de Recuperação de Senha ";
+                _mailMessage.IsBodyHtml = true;
+                _mailMessage.Body = $" Houve uma solicitação para alterar sua senha! Se você não fez essa solicitação, ignore este e-mail. Caso contrário, clique neste link para alterar sua senha: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Redefinir senha</a></p>";
+
+                //CONFIGURAÇÃO COM PORTA
+                SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
+
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new NetworkCredential("gblzinhokk3@hotmail.com", "biel010203");
+                _smtpClient.EnableSsl = true;
+                _smtpClient.Send(_mailMessage);
+
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Redefinir senha",
+                //    $"Redefinir sua senha por <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

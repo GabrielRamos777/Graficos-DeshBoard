@@ -35,11 +35,11 @@ namespace NOPAINNOGAIN.Controllers
         [Route("dashboard")]
         public async Task<IActionResult> Index()
         {
-            ViewBag.cliques = _context.MedGrupo.Count();
-            ViewBag.comentarios = _context.Comentarios.Count();
-            ViewBag.usuarios = _context.Usuarios.Count();
-            ViewBag.resultado = _context.Funcionarios.Count();
-            ViewBag.equipamentos = _context.Aparelhos.Count();
+            ViewBag.cliques = _context.MedGrupoGR.Count();
+            ViewBag.comentarios = _context.ComentariosGR.Count();
+            ViewBag.usuarios = _context.UsuariosGR.Count();
+            ViewBag.resultado = _context.FuncionariosGR.Count();
+            ViewBag.equipamentos = _context.AparelhosGR.Count();
 
             return View();
             
@@ -51,7 +51,7 @@ namespace NOPAINNOGAIN.Controllers
         }
         public async Task<IActionResult> Logar(Usuario usuario)
         {
-            SendMail();
+            //SendMail();
 
             usuario.ID = Guid.NewGuid();
             _context.Add(usuario);
@@ -59,84 +59,84 @@ namespace NOPAINNOGAIN.Controllers
             return Redirect("/dashboard");
         }
 
-        public bool SendMail()
-        {
-            try
-            {
-                // Estancia da Classe de Mensagem
-                MailMessage _mailMessage = new MailMessage();
-                // Remetente
-                _mailMessage.From = new MailAddress("gmussolini@provertec.com.br");
+        //public bool SendMail()
+        //{
+        //    try
+        //    {
+        //        // Estancia da Classe de Mensagem
+        //        MailMessage _mailMessage = new MailMessage();
+        //        // Remetente
+        //        _mailMessage.From = new MailAddress("gramos@provertec.com.br");
 
-                //Contrói o MailMessage
-                _mailMessage.To.Add("lfigueiredo@provertec.com.br");
-                _mailMessage.Subject = "Usuário Acabou de Logar no Sistema";
-                _mailMessage.IsBodyHtml = true;
-                _mailMessage.Body = $"<h4>Olá Diego, tudo bem?</h4><br>Um usuário acabou de logar no Sistema, seu negócio está crescendo<h4>Orgulhe-se</h4>Obs: Iremos te trazer mais informações sobre os próximos passos do usuário no sistema<br><h4>Obrigado!</h4>";
+        //        //Contrói o MailMessage
+        //        _mailMessage.To.Add("gramos@provertec.com.br");
+        //        _mailMessage.Subject = "Usuário Acabou de Logar no Sistema";
+        //        _mailMessage.IsBodyHtml = true;
+        //        _mailMessage.Body = $"<h4>Olá, tudo bem?</h4><br>Um usuário acabou de logar no Sistema, seu negócio está crescendo<h4>Orgulhe-se</h4>Obs: Iremos te trazer mais informações sobre os próximos passos do usuário no sistema<br><h4>Obrigado!</h4>";
 
-                //CONFIGURAÇÃO COM PORTA
-                SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
+        //        //CONFIGURAÇÃO COM PORTA
+        //        SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
 
-                //CONFIGURAÇÃO SEM PORTA
-                // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
+        //        //CONFIGURAÇÃO SEM PORTA
+        //        // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
 
-                // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
-                _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("gmussolini@provertec.com.br", "Prover2022!");
+        //        // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
+        //        _smtpClient.UseDefaultCredentials = false;
+        //        _smtpClient.Credentials = new NetworkCredential("gramos@provertec.com.br", "Flamengo@!22");
 
-                _smtpClient.EnableSsl = true;
+        //        _smtpClient.EnableSsl = true;
 
-                _smtpClient.Send(_mailMessage);
+        //        _smtpClient.Send(_mailMessage);
 
-                return true;
+        //        return true;
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public bool SendMail2()
-        {
-            try
-            {
-                // Estancia da Classe de Mensagem
-                MailMessage _mailMessage = new MailMessage();
-                // Remetente
-                _mailMessage.From = new MailAddress("gramos@provertec.com.br");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+        //public bool SendMail2()
+        //{
+        //    try
+        //    {
+        //        // Estancia da Classe de Mensagem
+        //        MailMessage _mailMessage = new MailMessage();
+        //        // Remetente
+        //        _mailMessage.From = new MailAddress("gramos@provertec.com.br");
 
-                string nome = Request.Form["Nome"];
-                string documento = Request.Form["Documento"];
-                DateTime data = Convert.ToDateTime(Request.Form["DataNascimento"]);
-                double salario = Convert.ToDouble(Request.Form["Salario"]);
-                //Contrói o MailMessage
-                _mailMessage.To.Add("gramos@provertec.com.br");
-                _mailMessage.Subject = "Funcionário Cadastrado Com Sucesso ";
-                _mailMessage.IsBodyHtml = true;
-                _mailMessage.Body = $"<h4>Olá Diego, tudo bem?</h4><br>Tivemos mais um cadastro de Funcionário, segue algumas informações importantes do novo Funcionário:<br><br>Nome: {nome}<br>Documento: {documento}<br>Data de Nascimento: {data.ToString("dd/MM/yyyy")}<br>Salario: R$ {salario.ToString("F")}<br><br>Obs: Seguiremos te trazendo mais informações sobre os próximos passos do usuário no sistema<br><h4>Obrigado!</h4>";
+        //        string nome = Request.Form["Nome"];
+        //        string documento = Request.Form["Documento"];
+        //        DateTime data = Convert.ToDateTime(Request.Form["DataNascimento"]);
+        //        double salario = Convert.ToDouble(Request.Form["Salario"]);
+        //        //Contrói o MailMessage
+        //        _mailMessage.To.Add("gramos@provertec.com.br");
+        //        _mailMessage.Subject = "Funcionário Cadastrado Com Sucesso ";
+        //        _mailMessage.IsBodyHtml = true;
+        //        _mailMessage.Body = $"<h4>Olá Diego, tudo bem?</h4><br>Tivemos mais um cadastro de Funcionário, segue algumas informações importantes do novo Funcionário:<br><br>Nome: {nome}<br>Documento: {documento}<br>Data de Nascimento: {data.ToString("dd/MM/yyyy")}<br>Salario: R$ {salario.ToString("F")}<br><br>Obs: Seguiremos te trazendo mais informações sobre os próximos passos do usuário no sistema<br><h4>Obrigado!</h4>";
 
-                //CONFIGURAÇÃO COM PORTA
-                SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
+        //        //CONFIGURAÇÃO COM PORTA
+        //        SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
 
-                //CONFIGURAÇÃO SEM PORTA
-                // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
+        //        //CONFIGURAÇÃO SEM PORTA
+        //        // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
 
-                // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
-                _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("gramos@provertec.com.br", "Prover2022!");
+        //        // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
+        //        _smtpClient.UseDefaultCredentials = false;
+        //        _smtpClient.Credentials = new NetworkCredential("gramos@provertec.com.br", "Flamengo@!22");
 
-                _smtpClient.EnableSsl = true;
+        //        _smtpClient.EnableSsl = true;
 
-                _smtpClient.Send(_mailMessage);
+        //        _smtpClient.Send(_mailMessage);
 
-                return true;
+        //        return true;
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         // GET: Funcionarios/Details/5
         public async Task<IActionResult> Details(Guid id)

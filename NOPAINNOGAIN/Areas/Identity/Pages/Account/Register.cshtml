@@ -17,21 +17,22 @@
                         <div class="card-login">
                             <h1>REGISTRE</h1>
                             <div class="form-group">
-                                <label asp-for="Input.Cpf"></label>
-                                <input asp-for="Input.Cpf" id="cpf" class="form-control" onblur="funcaoCPF((this)" />
-                                <span asp-validation-for="Input.Cpf" class="text-danger">O CPF é inválido.</span>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <label asp-for="Input.Email" style="color: white;"></label>
+                                <input asp-for="Input.Email" id="cpf" class="form-control" onblur="funcaoCPF((this)" />
+                                @*<span asp-validation-for="Input.Email" class="text-danger"></span>*@
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input.Password"></label>
+                                <label asp-for="Input.Password" style="color: white;"></label>
                                 <input asp-for="Input.Password" class="form-control" />
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                @*<span asp-validation-for="Input.Password" class="text-danger"></span>*@
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input.ConfirmPassword"></label>
+                                <label asp-for="Input.ConfirmPassword" style="color: white;"></label>
                                 <input asp-for="Input.ConfirmPassword" class="form-control" />
-                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                @*<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>*@
                             </div>
-                            <button id="button" type="submit" class="btn btn-primary" onclick="validarCPF()">CRIAR</button>
+                            <button id="button" type="submit" class="btn btn-primary" style="color: white;" onclick="validarCPF()">CRIAR</button>
                         </div>
                     </div>
                 </div>

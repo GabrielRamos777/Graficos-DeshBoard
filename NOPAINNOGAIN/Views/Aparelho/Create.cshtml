@@ -4,8 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-<h4>Aparelho</h4>
+<h1 class="text-center">Criar novo aparelho</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Preco" class="control-label"></label>
-                <input asp-for="Preco" placeholder="Digite o preço:" class="form-control" />
+                <input asp-for="Preco" id="preco" placeholder="Digite o preço:" class="form-control" />
                 <span asp-validation-for="Preco" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,16 +36,19 @@
                 <span asp-validation-for="tempoFim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" /> | <a asp-action="Index" class="btn btn-dark">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js" integrity="sha512-hAJgR+pK6+s492clbGlnrRnt2J1CJK6kZ82FZy08tm6XG2Xl/ex9oVZLE6Krz+W+Iv4Gsr8U2mGMdh0ckRH61Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $("#preco").mask('###0,00', { reverse: true })
+</script>
+
 }

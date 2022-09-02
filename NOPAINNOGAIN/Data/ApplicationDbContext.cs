@@ -14,12 +14,12 @@ namespace NOPAINNOGAIN.Data
         {
         }
 
-        public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<MedGrupo> MedGrupo { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Comentario> Comentarios { get; set; }
-        public DbSet<Logado> Logados { get; set; }
-        public DbSet<Aparelho> Aparelhos { get; set; }
+        public DbSet<Funcionario> FuncionariosGR { get; set; }
+        public DbSet<Endereco> EnderecosGR { get; set; }
+        public DbSet<MedGrupo> MedGrupoGR { get; set; }
+        public DbSet<Usuario> UsuariosGR { get; set; }
+        public DbSet<Comentario> ComentariosGR { get; set; }
+        public DbSet<Logado> LogadosGR { get; set; }
+        public DbSet<Aparelho> AparelhosGR { get; set; }
     }
 }

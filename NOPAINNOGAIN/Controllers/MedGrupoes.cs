@@ -134,7 +134,7 @@ namespace NOPAINNOGAIN.Controllers
         //}
         private bool MedGrupoExists(Guid id)
         {
-            return _context.MedGrupo.Any(e => e.ID == id);
+            return _context.MedGrupoGR.Any(e => e.ID == id);
         }
     }
 }
